@@ -1,6 +1,6 @@
 # MMWavenet
 
-
+<span style="color: grey">
        |                                               |
        |                                               |
        |                                               |
@@ -60,3 +60,6 @@ Residual block                |
     +-------------------->                                                                  |
                                                                                             |
                                                                                         +---+
+
+       
+</span>
