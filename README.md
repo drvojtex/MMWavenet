@@ -1,5 +1,10 @@
 # MMWavenet
 
+The Mean-Max Wavenet neural network (MMWavenet) for classification of data arranged in a time-dependent series, where each sample of such a series may consist of multiple features. The MMWavenet consists of stacked residual block, after each residual block there is a MeanPool-MaxPool layer, which output continues to next residual block as well as to skip-connection. The skip-connections are processed by convolutions and dense layers to final output.
+
+The input shape is in format (lenght of serie sample, features count, batch size). 
+
+## Schema
 
        |                                               |
        |                                               |
@@ -46,7 +51,7 @@
                               ^
                               |
                               +
-    input - shape=(sample dimension, features count, batch)
+    input - shape=(lenght of serie sample, features count, batch)
 
                                                                                         +---+
         Skip-connections                                                                    |
