@@ -63,3 +63,8 @@ The input shape is in format (lenght of serie sample, features count, batch size
                                                                                             |
                                                                                         +---+
 
+## Repository
+The repository is organised as follows: in the network.jl is implemented the whole MMWavenet. The scripts dataset.jl and prepare_sample.py are used to make dataset from given pcap files and store it into .bson format. The main.jl builds the neural network, loads dataset, train the network and shows result on validation data.
+
+
+
