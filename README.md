@@ -48,9 +48,6 @@ Residual block                |
                               +
     input - shape=(sample dimension, features count, batch)
 </span>
-
-
-
 <span style="color: grey">                                                                                      +---+
         Skip-connections                                                                    |
     +-------------------->  Conv1D (ks=1, filters=>1, stride=1) +----> Dense (out_dim=1)    |
