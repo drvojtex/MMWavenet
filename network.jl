@@ -28,7 +28,7 @@ Build the wavenet-nn for samples which consists of `in_dim` sub-samples and each
 The `filters` and `kernel_size` are numbers of filters and kernel size for each convolution, `out_dim` is number of target classes. 
 Returns the model.
 """ ->
-function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=20, kernel_size::Int64=2, out_dim::Int64)
+function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=2, kernel_size::Int64=2, out_dim::Int64)
     
     parts = []
     
@@ -66,7 +66,7 @@ function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=20, kernel
                                     Dense(Int(floor(in_dim/2^i)), 1, identity))])
     end
     σ_ = Chain(x->x.+0.5, x->σ.(x))
-    final = Chain(Dense(length(skip_blocks)+1, 1, σ_))
+    final = Chain(Dense(length(skip_blocks)+1, out_dim, σ_))
     append!(parts, [final])
 
     #=
@@ -112,8 +112,8 @@ function train!(ps, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, val::Tuple{Arr
     ps
 end
 
-function print_conmat(ŷ::Vector{Int64}, y::Vector{Int64}, absolut_values::Bool)
-    cm = ConfusionMatrix(y, ŷ)
+function print_conmat(ŷ::Vector{Float64}, y::Vector{Int64}, absolut_values::Bool)
+    cm = ConfusionMatrix(y, ŷ, 0.5)
     if absolut_values
         @printf "
         +---------------------+------------------+------------------+
