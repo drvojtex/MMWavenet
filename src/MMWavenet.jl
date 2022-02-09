@@ -26,8 +26,8 @@ function main(sample_len::Int64, sample_features::Int64, path::String; itr::Int6
     train!(θ, wavenet, trn_dataset, val_dataset, iter=itr)
 
     println("Confusion matrix for validation data.")
-    print_conmat(Vector{Float64}(wavenet(val_data)'[:,1]), Vector{Int64}(val_labels), true)
-    print_conmat(Vector{Float64}(wavenet(val_data)'[:,1]), Vector{Int64}(val_labels), false)
+    print_conmat(Vector{Float64}(wavenet(val_dataset[1])'[:,1]), Vector{Int64}(val_dataset[2]), true)
+    print_conmat(Vector{Float64}(wavenet(val_dataset[1])'[:,1]), Vector{Int64}(val_dataset[2]), false)
 
     return wavenet, Θ
 end
