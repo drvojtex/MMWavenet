@@ -328,8 +328,8 @@ version = "0.3.6"
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[deps.MMWavenet]]
-deps = ["BSON", "EvalMetrics", "Flux", "IterTools", "Pickle", "Printf", "PyCall", "Shuffle", "Statistics", "StatsBase"]
-git-tree-sha1 = "d4dc6c25d9dc61812ff04f80498944b8ed057777"
+deps = ["BSON", "EvalMetrics", "Flux", "IterTools", "Pickle", "Printf", "PyCall", "Shuffle", "Statistics", "StatsBase", "Test"]
+git-tree-sha1 = "e34a5d25b4f99df87ee44051363c5c84de627c20"
 repo-rev = "master"
 repo-url = "https://github.com/kozvojtex/MMWavenet"
 uuid = "da6a88c6-2ebe-4682-bec3-e08fdaad5a93"
