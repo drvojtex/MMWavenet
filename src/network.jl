@@ -28,7 +28,7 @@ Build the wavenet-nn for samples which consists of `in_dim` sub-samples and each
 The `filters` and `kernel_size` are numbers of filters and kernel size for each convolution, `out_dim` is number of target classes. 
 Returns the model.
 """ ->
-function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=2, kernel_size::Int64=2, out_dim::Int64)
+function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=12, kernel_size::Int64=2, out_dim::Int64=1)
     
     parts = []
     
@@ -112,6 +112,11 @@ function train!(ps, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, val::Tuple{Arr
     ps
 end
 
+@doc """
+    print_conmat(ŷ::Vector{Float64}, y::Vector{Int64}, absolut_values::Bool)
+
+Print confusion matrix for predicted probabilities 'ŷ' (with treshold 0.5) and targets 'y'.
+""" ->
 function print_conmat(ŷ::Vector{Float64}, y::Vector{Int64}, absolut_values::Bool)
     cm = ConfusionMatrix(y, ŷ, 0.5)
     if absolut_values
@@ -122,7 +127,7 @@ function print_conmat(ŷ::Vector{Float64}, y::Vector{Int64}, absolut_values::Boo
         | Predicted positives | %12d     | %12d     |
         | Predicted negatives | %12d     | %12d     |
         +---------------------+------------------+------------------+
-        " cm.tp cm.fp cm.fn cm.tn
+        \n" cm.tp cm.fp cm.fn cm.tn
     else
         total = cm.p+cm.n
         @printf "
@@ -132,6 +137,6 @@ function print_conmat(ŷ::Vector{Float64}, y::Vector{Int64}, absolut_values::Boo
         | Predicted positives |       %.2f       |       %.2f       |
         | Predicted negatives |       %.2f       |       %.2f       |
         +---------------------+------------------+------------------+
-        " cm.tp/total cm.fp/total cm.fn/total cm.tn/total
+        \n" cm.tp/total cm.fp/total cm.fn/total cm.tn/total
     end
 end

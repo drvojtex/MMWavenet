@@ -1,3 +1,8 @@
+name = "MMWavenet"
+uuid = "da6a88c6-2ebe-4682-bec3-e08fdaad5a93"
+authors = ["kozvojtex <vojtech.kozel.cz@gmail.com>"]
+version = "0.1.0"
+
 [deps]
 BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
 EvalMetrics = "251d5f9e-10c1-4699-ba24-e0ad168fa3e4"
@@ -5,6 +10,7 @@ Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
 IterTools = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
 Pickle = "fbb45041-c46e-462f-888f-7c521cafbc2c"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 Shuffle = "bf21e494-c40e-4daa-abfb-de5ec0aad010"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
