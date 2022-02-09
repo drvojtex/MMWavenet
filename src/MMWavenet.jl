@@ -29,7 +29,7 @@ function main(sample_len::Int64, sample_features::Int64, path::String; itr::Int6
     print_conmat(Vector{Float64}(wavenet(val_dataset[1])'[:,1]), Vector{Int64}(val_dataset[2]), true)
     print_conmat(Vector{Float64}(wavenet(val_dataset[1])'[:,1]), Vector{Int64}(val_dataset[2]), false)
 
-    return wavenet, Θ
+    return wavenet, θ
 end
 
 end 
