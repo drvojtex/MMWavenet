@@ -93,19 +93,20 @@ function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=12, kernel
     )
 end
 
-loss_mse(x, y) = Flux.mse(wavenet(x)', y)
-acc_t(x, y, t) = sum((wavenet(x) .> t) .== y')/length(y)
+loss_mse(x, y, network) = Flux.mse(network(x)', y)
+acc_t(x, y, t, network) = sum((network(x) .> t) .== y')/length(y)
 
-function train!(ps, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, val::Tuple{Array{Float32, 3}, Vector{Int64}}; 
+function train!(ps, network, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, 
+                    val::Tuple{Array{Float32, 3}, Vector{Int64}}; 
                     loss=loss_mse, acc=acc_t, threshold::Float64=0.5, iter::Int64=100)
     X, Y = trn[1], trn[2]
     x, y = val[1], val[2]
     for i=1:iter
-        gs = gradient(() -> loss(X, Y), ps)
+        gs = gradient(() -> loss(X, Y, network), ps)
         Flux.Optimise.update!(ADAM(), ps, gs)
         if i%10 == 0 
-            @printf "iter: %d/%d, trn_loss: %.4f, trn_acc: %.2f; val_loss: %.4f, val_acc: %.2f\n" i iter loss(X, Y) acc(X, Y, threshold) loss(x, y) acc(x, y, threshold)
-            @printf "trn_auc %.2f, val_auc %.2f\n\n" binary_eval_report(Y, Vector{Float64}((wavenet(X)[1,:])))["au_roccurve"] binary_eval_report(y, Vector{Float64}((wavenet(x)[1,:])))["au_roccurve"]
+            @printf "iter: %d/%d, trn_loss: %.4f, trn_acc: %.2f; val_loss: %.4f, val_acc: %.2f\n" i iter loss(X, Y, network) acc(X, Y, threshold, network) loss(x, y, network) acc(x, y, threshold, network)
+            @printf "trn_auc %.2f, val_auc %.2f\n\n" binary_eval_report(Y, Vector{Float64}((network(X)[1,:])))["au_roccurve"] binary_eval_report(y, Vector{Float64}((network(x)[1,:])))["au_roccurve"]
 
         end
     end
