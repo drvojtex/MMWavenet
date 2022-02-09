@@ -93,9 +93,18 @@ function build_wavenet(features::Int64, in_dim::Int64; filters::Int64=12, kernel
     )
 end
 
+# Compute MSE loss function for 'network'.
 loss_mse(x, y, network) = Flux.mse(network(x)', y)
+# Accuracy of 'network' for given treshold 't', data 'x' and targets 'y'.
 acc_t(x, y, t, network) = sum((network(x) .> t) .== y')/length(y)
 
+@doc """
+    train!(ps, network, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, 
+        val::Tuple{Array{Float32, 3}, Vector{Int64}}; 
+        loss=loss_mse, acc=acc_t, threshold::Float64=0.5, iter::Int64=100)
+
+Train parametres 'ps' of the 'network' on train 'trn' dataset.
+""" ->
 function train!(ps, network, trn::Tuple{Array{Float32, 3}, Vector{Int64}}, 
                     val::Tuple{Array{Float32, 3}, Vector{Int64}}; 
                     loss=loss_mse, acc=acc_t, threshold::Float64=0.5, iter::Int64=100)

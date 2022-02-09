@@ -86,6 +86,9 @@ def create_samples(mal_path, clean_path, mal_sample_path, clean_sample_path):
 
 Loads pcap samples stored on paths 'mal_path' and 'clean_path', extract features and 
 stored them in pickle format on 'mal_sample_path' and 'clean_sample_path'.
+
+From each packet are extract these features: packet direction, 
+time difference to next recieved, time difference to next send, packet size.
 """ ->
 function convert_jsons_2_pickle_samples(mal_path::String, clean_path::Stirng, 
             mal_sample_path::String, clean_sample_path::String)
