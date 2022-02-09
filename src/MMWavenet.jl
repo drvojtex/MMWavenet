@@ -3,7 +3,7 @@ module MMWavenet
 using BSON
 using Shuffle
 
-export main, build_wavenet
+export main, build_wavenet, train!
 export save_dataset, load_dataset
 export convert_jsons_2_pickle_samples            
 

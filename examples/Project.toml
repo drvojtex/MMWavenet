@@ -1,2 +1,3 @@
 [deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 MMWavenet = "da6a88c6-2ebe-4682-bec3-e08fdaad5a93"
