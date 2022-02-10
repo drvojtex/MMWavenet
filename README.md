@@ -68,7 +68,4 @@ The input shape is in format (lenght of serie sample, features count, batch size
                                                                                         +---+
 
 ## Repository
-The repository is organised as follows: in the network.jl is implemented the whole MMWavenet. The scripts dataset.jl and prepare_sample.py are used to make dataset from given pcap files and store it into .bson format. The main.jl builds the neural network, loads dataset, train the network and shows result on validation data.
-
-
-
+The repository is organised as follows. In the src folder are source scripts: network.jl (implementation of the whole MMWavenet), prepare_sample.jl (extracts features of packets from pcap file and stores them into pickle format), dataset.jl (collects pickle samples and stores them into bson dataset file) and MMWavenet.jl (main script to build and train neural network). In the examples folder an example.jl script that shows how to load the dataset and train neural network (and also includes benchmark of training). In the test folder is a script to test the gradient computation of neural network by comparing automatic differentiation with finite differentiation (Central Difference Approximation). 
