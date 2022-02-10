@@ -15,7 +15,7 @@ function numgrad(model, data::Array{Float32, 3})
     for i=1:size(data)[1]
         for j=1:size(data)[2]
             Δ::Array{Float32, 3} = Array{Float32, 3}(zeros(size(data)))
-            Δ[i, j, 1] = mean(data)/100
+            Δ[i, j, 1] = mean(data)/1000
             gradient[i, j, 1] = cda(model, data, Δ)[1]
         end
     end
@@ -39,8 +39,8 @@ function gradcheck()
     @testset "finiteDiff" begin
         for _=1:10
             x::Array{Float32, 3} = Array{Float32, 3}(rand(0:0.0001:0.001, (3, 2, 1)))
-            @test median(abs.((numgrad(m, x) .- 
-                gradient(Chain(m, t->t[1]), x)[1]))) < 10e-3
+            @test mean(abs.((numgrad(m, x) .- 
+                gradient(Chain(m, t->t[1]), x)[1]))) < 10e-2
         end
     end
     
